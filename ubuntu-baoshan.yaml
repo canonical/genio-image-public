@@ -43,9 +43,9 @@ customization:
       instance_id: ubuntu-desktop
   extra-ppas:
     - name: baoshan-ppa/baoshan-updates
+      # Please replace #{PPA_AUTH_BAOSHAN_UPDATES}# to a valid access token
       auth: #{PPA_AUTH_BAOSHAN_UPDATES}#
       fingerprint: 703A0CD379B768B77C1BA91FDD3EC3B6C6D209D1
-    - name: kxuan/baoshan
   extra-snaps:
     - name: snapd
     - name: core20
