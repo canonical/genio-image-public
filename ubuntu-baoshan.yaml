@@ -1,0 +1,110 @@
+name: baoshan
+display-name: Ubuntu Desktop (baoshan) arm64
+revision: 1
+architecture: arm64
+series: noble
+class: preinstalled
+kernel: linux-mtk
+gadget:
+  url: "https://git.launchpad.net/~kxuan/+git/baoshan-gadget"
+  type: git
+  branch: classic24.04
+  target: classic
+rootfs:
+  mirror: "http://ports.ubuntu.com/ubuntu-ports/"
+  pocket: updates
+  components:
+    - main
+    - restricted
+    - multiverse
+    - universe
+  seed:
+    urls:
+      - "git://git.launchpad.net/~ubuntu-core-dev/ubuntu-seeds/+git/"
+    branch: noble
+    names:
+      - desktop
+      - desktop-minimal
+      - minimal
+      - standard
+  sources-list-deb822: true
+customization:
+  cloud-init:
+    user-data: |
+      #cloud-config
+      chpasswd:
+        expire: false
+        users:
+          - name: ubuntu
+            password: ubuntu
+            type: text
+    meta-data: |
+      dsmode: local
+      instance_id: ubuntu-desktop
+  extra-ppas:
+    - name: baoshan-ppa/baoshan-updates
+      auth: #{PPA_AUTH_BAOSHAN_UPDATES}#
+      fingerprint: 703A0CD379B768B77C1BA91FDD3EC3B6C6D209D1
+    - name: kxuan/baoshan
+  extra-snaps:
+    - name: snapd
+    - name: core20
+    - name: core22
+    - name: core24
+      channel: edge
+    - name: bare
+    - name: snap-store
+      channel: stable/ubuntu-24.04
+    - name: gtk-common-themes
+      channel: stable/ubuntu-24.04
+    - name: snapd-desktop-integration
+      channel: stable/ubuntu-24.04
+    - name: gnome-46-2404
+      channel: edge
+    - name: firefox
+      channel: stable/ubuntu-24.04
+  extra-packages:
+    - name: cloud-init
+    - name: ubuntu-oem-keyring
+    - name: shim-signed
+    - name: grub-efi-arm64
+    - name: grub-efi-arm64-bin
+    - name: grub2-common
+    - name: linux-mtk
+    - name: initramfs-tools-devices
+    - name: network-manager
+    - name: netplan.io
+    - name: net-tools
+    - name: linux-firmware-mediatek-genio
+    - name: bluez
+    - name: alsa-ucm-conf
+    - name: ubuntu-desktop-minimal
+    # Workaround for LP#2061965. 
+    # - name: libmali-mtk-8188
+    # - name: libmali-mtk-8195
+    # - name: libmali-mtk-8365
+    - name: oem-baoshan-meta
+    - name: oem-baoshan-genio-desktop-meta
+
+  manual:
+    make-dirs:
+      - path: /boot/grub
+        permissions: 0755
+  fstab:
+    - label: writable
+      mountpoint: /
+      filesystem-type: ext4
+      mount-options: rw,relatime
+      dump: false
+      fsck-order: 1
+    - label: system-boot
+      mountpoint: /boot/efi
+      filesystem-type: vfat
+      mount-options: umask=0077
+      dump: false
+      fsck-order: 2
+artifacts:
+  img:
+    - name: ubuntu-24.04-preinstalled-desktop+baoshan.img
+  manifest:
+    name: ubuntu-24.04-preinstalled-desktop+baoshan.manifest
