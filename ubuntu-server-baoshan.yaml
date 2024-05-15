@@ -86,6 +86,6 @@ customization:
       fsck-order: 2
 artifacts:
   img:
-    - name: ubuntu-24.04-preinstalled-server-arm64+baoshan.img
+    - name: ubuntu.img
   manifest:
-    name: ubuntu-24.04-preinstalled-server-arm64+baoshan.manifest
+    name: ubuntu.manifest
