@@ -1,18 +1,19 @@
 #!/bin/bash
 set -e
-if [[ "$#" -ne 2 ]]; then
+if [[ "$#" -lt 2 ]]; then
     echo "Incorrect parameters" >&2
     exit 1
 fi
 filename="$1"
 firmware="$2"
+sector_size="${3:-512}"
 
 if [ -z "$filename" ] || ! [ -f "$filename" ]; then
     echo "$filename does not exists" >&2
     exit 1
 fi
 
-lodev=$(losetup --find --show --partscan --read-only "$filename")
+lodev=$(losetup --find --show --partscan --read-only --sector-size "$sector_size" "$filename")
 if [ -z "$lodev" ]; then
     return 1
 fi
