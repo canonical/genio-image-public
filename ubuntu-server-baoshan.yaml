@@ -20,7 +20,7 @@ rootfs:
     - universe
   seed:
     urls:
-      - "git://git.launchpad.net/~ubuntu-core-dev/ubuntu-seeds/+git/"
+      - "https://git.launchpad.net/~ubuntu-core-dev/ubuntu-seeds/+git/"
     branch: noble
     names:
       - server
