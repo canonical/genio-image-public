@@ -17,6 +17,7 @@ lodev=$(losetup --find --show --partscan --read-only --sector-size "$sector_size
 if [ -z "$lodev" ]; then
     return 1
 fi
+partprobe "$lodev"
 fwpart=$(blkid ${lodev}* | grep -F 'PARTLABEL="firmware"' | cut -d: -f1)
 dd if=$fwpart of="$firmware" bs=4k
 losetup -d "$lodev"
