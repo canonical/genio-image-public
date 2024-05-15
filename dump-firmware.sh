@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -ex
 if [[ "$#" -lt 2 ]]; then
     echo "Incorrect parameters" >&2
     exit 1
