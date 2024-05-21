@@ -105,6 +105,6 @@ customization:
       fsck-order: 2
 artifacts:
   img:
-    - name: ubuntu.img
+    - name: ubuntu-desktop.img
   manifest:
-    name: ubuntu.manifest
+    name: ubuntu-desktop.manifest

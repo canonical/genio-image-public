@@ -86,6 +86,6 @@ customization:
       fsck-order: 2
 artifacts:
   img:
-    - name: ubuntu.img
+    - name: ubuntu-server.img
   manifest:
-    name: ubuntu.manifest
+    name: ubuntu-server.manifest
