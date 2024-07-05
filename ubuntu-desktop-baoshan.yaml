@@ -20,13 +20,16 @@ rootfs:
     - universe
   seed:
     urls:
-      - "https://git.launchpad.net/~ubuntu-core-dev/ubuntu-seeds/+git/"
+      - "https://git.launchpad.net/~baoshan-team/ubuntu-seeds/+git/"
     branch: noble
     names:
+      - mediatek-genio-common
       - desktop
       - desktop-minimal
+      - desktop-mediatek-genio
       - minimal
       - standard
+      - supported-mediatek-genio-common
   sources-list-deb822: true
 customization:
   cloud-init:
@@ -47,45 +50,8 @@ customization:
       auth: #{PPA_AUTH_BAOSHAN_UPDATES}#
       fingerprint: 703A0CD379B768B77C1BA91FDD3EC3B6C6D209D1
   extra-snaps:
-    - name: snapd
-    - name: core20
-    - name: core22
-    - name: core24
-      channel: edge
-    - name: bare
-    - name: snap-store
-      channel: stable/ubuntu-24.04
-    - name: gtk-common-themes
-      channel: stable/ubuntu-24.04
-    - name: snapd-desktop-integration
-      channel: stable/ubuntu-24.04
-    - name: gnome-46-2404
-      channel: edge
     - name: firefox
       channel: stable/ubuntu-24.04
-  extra-packages:
-    - name: cloud-init
-    - name: ubuntu-oem-keyring
-    - name: shim-signed
-    - name: grub-efi-arm64
-    - name: grub-efi-arm64-bin
-    - name: grub2-common
-    - name: linux-mtk
-    - name: initramfs-tools-devices
-    - name: network-manager
-    - name: netplan.io
-    - name: net-tools
-    - name: linux-firmware-mediatek-genio
-    - name: bluez
-    - name: alsa-ucm-conf
-    - name: ubuntu-desktop-minimal
-    # Workaround for LP#2061965. 
-    # - name: libmali-mtk-8188
-    # - name: libmali-mtk-8195
-    # - name: libmali-mtk-8365
-    - name: oem-baoshan-meta
-    - name: oem-baoshan-genio-desktop-meta
-
   manual:
     make-dirs:
       - path: /boot/grub
