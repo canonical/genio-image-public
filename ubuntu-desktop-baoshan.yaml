@@ -8,7 +8,7 @@ kernel: linux-mtk
 gadget:
   url: "https://git.launchpad.net/~kxuan/+git/baoshan-gadget"
   type: git
-  branch: classic24.04
+  branch: classic24.04-dev
   target: classic
 rootfs:
   mirror: "http://ports.ubuntu.com/ubuntu-ports/"
