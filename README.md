@@ -4,7 +4,7 @@
 
 # Available Automation
 
-For building locally, there is a `build.sh` script in this repository.
+For building locally, there is a `scripts/build.sh` script in this repository.
 
 There are also Github Actions in the `.github` directory. The `build.yaml`
 file schedules builds of the Genio images daily, and is the ultimate authority
@@ -77,7 +77,7 @@ After building the images with the code snippets in this readme, they will
 appear in the current directory next to the YAML files. The important files
 are `ubuntu.img` and `ubuntu.json`.
 
-If using the `build.sh` script then an output directory is created for the
+If using the `scripts/build.sh` script then an output directory is created for the
 build to contain all the files.
 
 # Build eMMC Image for G350/G510/G700/G1200
@@ -96,12 +96,12 @@ $ sudo ubuntu-image classic ubuntu-server-baoshan.yaml
 
 ## To build desktop image
 ```
-$ sudo ubuntu-image classic --sector-size=4096 ubuntu-desktop-baoshan.yaml
+$ sudo ubuntu-image classic --sector-size=4096 classic/noble/ubuntu-desktop-baoshan.yaml
 ```
 
 ## To build server image
 ```
-$ sudo ubuntu-image classic --sector-size=4096 ubuntu-server-baoshan.yaml
+$ sudo ubuntu-image classic --sector-size=4096 classic/noble/ubuntu-server-baoshan.yaml
 ```
 
 # Using the images
@@ -172,7 +172,7 @@ run the commands and wait.
 # Dump firmware
 
 ```
-# ./dump-firmware.sh "<raw image>" "<output firmware.vfat>" "[sector size]"
-./dump-firmware.sh out/ubuntu.img firmware.vfat 4096
+# ./scripts/dump-firmware.sh "<raw image>" "<output firmware.vfat>" "[sector size]"
+./scripts/dump-firmware.sh out/ubuntu.img firmware.vfat 4096
 ```
 

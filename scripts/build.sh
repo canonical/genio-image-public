@@ -64,7 +64,7 @@ outdir=$(mktemp -d -p "$PWD" "out.ubuntu-$variant.XXXXXX")
 echo "Building $storagetype image with $sectorsize byte sectors."
 echo "  - Output directory: ${outdir}"
 
-sudo ubuntu-image -O "$outdir" --sector-size=$sectorsize classic "ubuntu-$variant-baoshan.yaml"
+sudo ubuntu-image -O "$outdir" --sector-size=$sectorsize classic "classic/noble/ubuntu-$variant-baoshan.yaml"
 sudo chown -R "$(id -u):$(id -g)" "$outdir"
 img2simg "$outdir/ubuntu-$variant.img" "$outdir/ubuntu.img"
 rm -f "$outdir/ubuntu-$variant.img"
