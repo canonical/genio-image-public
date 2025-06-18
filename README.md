@@ -84,12 +84,12 @@ build to contain all the files.
 
 ## To build desktop image
 ```
-$ sudo ubuntu-image classic ubuntu-desktop-baoshan.yaml
+$ sudo ubuntu-image classic classic/noble/ubuntu-desktop-baoshan.yaml
 ```
 
 ## To build server image
 ```
-$ sudo ubuntu-image classic ubuntu-server-baoshan.yaml
+$ sudo ubuntu-image classic classic/noble/ubuntu-server-baoshan.yaml
 ```
 
 # Build UFS image for G1200
