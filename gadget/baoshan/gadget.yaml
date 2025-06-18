@@ -1,0 +1,53 @@
+volumes:
+  pc:
+    schema: gpt
+    bootloader: grub
+    structure:
+      - name: bootloaders
+        size: 4M
+        type: EBD0A0A2-B9E5-4433-87C0-68B6B72699C7
+      - name: bootloaders_b
+        size: 4M
+        type: EBD0A0A2-B9E5-4433-87C0-68B6B72699C7
+      - name: firmware
+        filesystem: vfat
+        type: 384E979B-EB76-435A-A3A6-1A071DBAD91D
+        size: 32M
+      - name: firmware_b
+        filesystem: vfat
+        type: 384E979B-EB76-435A-A3A6-1A071DBAD91D
+        size: 32M
+      - name: dramk
+        size: 524288
+        type: EBD0A0A2-B9E5-4433-87C0-68B6B72699C7
+      - name: misc
+        size: 1M
+        type: EBD0A0A2-B9E5-4433-87C0-68B6B72699C7
+      - name: bootassets
+        size: 32M
+        type: EBD0A0A2-B9E5-4433-87C0-68B6B72699C7
+      - name: ubuntu-boot
+        role: system-boot
+        filesystem: vfat
+        type: EF,C12A7328-F81F-11D2-BA4B-00A0C93EC93B
+        filesystem-label: system-boot
+        size: 500M
+        content:
+          - source: shimaa64.efi.signed
+            target: EFI/BOOT/BOOTAA64.efi
+          - source: fbaa64.efi
+            target: EFI/BOOT/fbaa64.efi
+          - source: mmaa64.efi
+            target: EFI/BOOT/mmaa64.efi
+          - source: shimaa64.efi.signed
+            target: EFI/ubuntu/shimaa64.efi
+          - source: grubaa64.efi.signed
+            target: EFI/ubuntu/grubaa64.efi
+          - source: BOOTAA64.CSV
+            target: EFI/ubuntu/BOOTAA64.CSV
+          - source: mmaa64.efi
+            target: EFI/ubuntu/mmaa64.efi
+          - source: grub.cfg
+            target: EFI/ubuntu/grub.cfg
+          - source: boot-assets/
+            target: /

@@ -6,10 +6,9 @@ series: noble
 class: preinstalled
 kernel: linux-mtk
 gadget:
-  url: "https://git.launchpad.net/~kxuan/+git/baoshan-gadget"
-  type: git
-  branch: classic24.04-dev
-  target: classic
+  url: 'file://../../gadget/baoshan'
+  branch: classic
+  type: directory
 rootfs:
   mirror: "http://ports.ubuntu.com/ubuntu-ports/"
   pocket: updates

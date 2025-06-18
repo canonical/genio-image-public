@@ -1,0 +1,4 @@
+deb http://ports.ubuntu.com noble main universe restricted multiverse
+deb http://ports.ubuntu.com noble-updates main universe restricted multiverse
+deb http://ports.ubuntu.com noble-backports main universe restricted multiverse
+deb http://ports.ubuntu.com noble-security main universe restricted multiverse

@@ -1,0 +1,3 @@
+#cloud-config
+instance_id: mtk
+local-hostname: mtk-genio

@@ -1,0 +1,55 @@
+name: mediatek-genio-classic
+version: '0.1'
+type: gadget
+base: core22
+summary: The classic gadget for MTK i300A Platform
+description: |
+  This gadget enables MTK i300A platform to work with Ubuntu Classic
+architectures:
+  - build-on: [amd64, arm64]
+    build-for: arm64
+grade: stable
+confinement: strict
+icon: icon.png
+parts:
+  gadget:
+    source: .
+    plugin: nil
+    override-build: |
+      set -x
+      # unconditionally set the arch-triplet since this snapcraft.yaml will
+      # always be used to produce an armhf snap
+      BUILD_ARCH_TRIPLET=aarch64-linux-gnu
+
+      if [ "$(arch)" != "aarch64" ]; then
+        echo "Cross compilation detected; using pre-defined sources list"
+        OPTIONAL_ARGS="SOURCES_HOST=\"./helpers/sources.list.cross\""
+      fi
+
+      if [ "${USE_OEM_ARCHIVE:-false}" == "true" ]; then
+        echo "Download packages from OEM archive"
+        . ./helpers/cesg-sources.key-info
+        SOURCES_OEM="\"./helpers/cesg-sources.list\""
+      else
+        echo "Download packages from project-updates"
+        . ./helpers/project-sources.key-info
+        SOURCES_OEM="\"./helpers/project-sources.list\""
+      fi
+      OPTIONAL_ARGS="$OPTIONAL_ARGS SOURCES_OEM=$SOURCES_OEM PPA_KEY_INFO=$PPA_KEY_INFO"
+
+      make -C ${SNAPCRAFT_PROJECT_DIR:-.} classic \
+        DESTDIR=${SNAPCRAFT_PART_INSTALL} \
+        ARCH="$(dpkg-architecture -t $BUILD_ARCH_TRIPLET -q DEB_HOST_ARCH)" \
+        PPA_ACCESS_TOKEN=${PPA_ACCESS_TOKEN} \
+        ${OPTIONAL_ARGS:-}
+    prime:
+      - grub.cfg
+      - BOOTAA64.CSV
+      - grubaa64.efi.signed
+      - shimaa64.efi.signed
+      - fbaa64.efi
+      - mmaa64.efi
+      - boot-assets/*
+      - device-tree/*
+    build-packages:
+      - u-boot-tools
