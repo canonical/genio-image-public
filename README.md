@@ -173,6 +173,54 @@ run the commands and wait.
 
 ```
 # ./scripts/dump-firmware.sh "<raw image>" "<output firmware.vfat>" "[sector size]"
-./scripts/dump-firmware.sh out/ubuntu.img firmware.vfat 4096
+$ ./scripts/dump-firmware.sh out/ubuntu.img firmware.vfat 4096
 ```
 
+# Updating Image Definitions (Advanced)
+
+- **Warning**: Please be aware that using this script will remove all comments and reformat the YAML file upon saving.
+
+Make sure you define the correct token for PPAs:
+
+```
+$ SECRET_VARIABLE="your_launchpad_username:your_access_key"
+$ IMAGE_DEFINITION_FILE="classic/noble/ubuntu-desktop-baoshan.yaml"
+```
+
+### To add a new PPA
+
+```
+$ ./scripts/patch-image-definition.py customization.extra-ppas add \
+    --name "new-ppa/stable" \
+    --auth "${SECRET_VARIABLE}" \
+    --fingerprint "FINGERPRINT_VALUE_XXX" \
+    --keep-enabled true \
+    "${IMAGE_DEFINITION_FILE}"
+```
+
+### To remove a PPA
+
+```
+$ ./scripts/patch-image-definition.py customization.extra-ppas remove \
+    --name "baoshan-ppa/baoshan-updates" \
+    "${IMAGE_DEFINITION_FILE}"
+```
+
+### To update a PPA's fields
+
+```
+$ ./scripts/patch-image-definition.py customization.extra-ppas update \
+    --name "baoshan-ppa/baoshan-updates" \
+    --auth "${SECRET_VARIABLE}" \
+    "${IMAGE_DEFINITION_FILE}"
+```
+
+### To update other field's value
+
+You can also update the value of a specific field in the YAML, such as the `rootfs.mirror` URL.
+
+```
+$ ./scripts/patch-image-definition.py rootfs.mirror update \
+    --value "http://mirrors.ustc.edu.cn/ubuntu-ports/" \
+    "${IMAGE_DEFINITION_FILE}"
+```
