@@ -65,9 +65,33 @@ $ eval "$(snap run genio-tools.udev-script)"
 
 More information about these steps is available with `snap info genio-tools`
 
-Obtain an access token for the
-[baoshen-updates](https://launchpad.net/~baoshan-ppa/+archive/ubuntu/baoshan-updates/+subscriptions)
-PPA here. The token will be in the form `username:access-key`. Update the YAML
+## Including PPA Packages When Building Manually
+
+By default, the `classic/*/ubuntu-*-baoshan.yaml` files have the `extra-ppas` section set to an empty list.
+
+If you want to include PPA packages when building images manually, you need to modify the corresponding YAML file(s) and provide a valid PPA token.
+
+Example configuration:
+
+```YAML
+customization:
+  extra-ppas:
+    - name: baoshan-ppa/baoshan-updates
+      auth: <YOUR_PPA_TOKEN>
+      fingerprint: 703A0CD379B768B77C1BA91FDD3EC3B6C6D209D1
+      keep-enabled: false
+```
+
+**Note:**
+Make sure to replace <YOUR_PPA_TOKEN> with a valid token.
+Please contact the project administrator to request access to the required PPA token.
+
+Obtain an access tokens for Baoshan PPAs:
+
+- [baoshen-updates](https://launchpad.net/~baoshan-ppa/+archive/ubuntu/baoshan-updates/+subscriptions)
+- [baoshen-proposed](https://launchpad.net/~baoshan-ppa/+archive/ubuntu/baoshan-proposed/+subscriptions)
+
+The token will be in the form `username:access-key`. Update the YAML
 files with the access token so the build will be able to fetch required
 artifacts.
 
