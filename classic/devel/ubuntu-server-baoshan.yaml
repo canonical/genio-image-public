@@ -1,0 +1,82 @@
+name: ubuntu-server-genio-arm64
+display-name: Ubuntu Server arm64 for Genio
+revision: 1
+architecture: arm64
+series: devel
+class: preinstalled
+kernel: linux-image-generic
+gadget:
+  url: 'file://../../gadget/baoshan'
+  branch: classic
+  type: directory
+rootfs:
+  mirror: 'http://ports.ubuntu.com/ubuntu-ports/'
+  sources-list-deb822: true
+  pocket: updates
+  components:
+    - main
+    - restricted
+    - universe
+    - multiverse
+  seed:
+    urls:
+      - 'https://git.launchpad.net/~ubuntu-core-dev/ubuntu-seeds/+git/'
+    branch: devel
+    names:
+      - server
+      - minimal
+      - standard
+      - cloud-image
+customization:
+  components:
+    - main
+    - restricted
+    - universe
+    - multiverse
+  pocket: updates
+  extra-ppas: []
+  cloud-init:
+    user-data: |
+      #cloud-config
+      chpasswd:
+        expire: false
+        users:
+          - name: ubuntu
+            password: ubuntu
+            type: text
+    meta-data: |
+      dsmode: local
+      instance_id: ubuntu-server
+  extra-snaps:
+    - name: snapd
+    - name: core22
+    - name: lxd
+  extra-packages:
+    - name: network-manager
+    # signed EFI boot chain
+    - name: grub-efi-arm64-signed
+    - name: shim-signed
+    # for update-grub
+    - name: grub2-common
+  manual:
+    make-dirs:
+      - path: /boot/grub
+        permissions: 0755
+  fstab:
+    - label: writable
+      mountpoint: /
+      filesystem-type: ext4
+      mount-options: rw,relatime
+      dump: false
+      fsck-order: 1
+    - label: system-boot
+      mountpoint: /boot/efi
+      filesystem-type: vfat
+      mount-options: umask=0077
+      dump: false
+      fsck-order: 2
+artifacts:
+  img:
+    - name: ubuntu-server.img
+  manifest:
+    name: ubuntu-server.manifest
