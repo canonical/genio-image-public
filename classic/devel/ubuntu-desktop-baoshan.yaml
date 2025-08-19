@@ -1,5 +1,5 @@
 name: ubuntu-desktop-genio-arm64
-display-name: Ubuntu Server arm64 for Genio
+display-name: Ubuntu Desktop arm64 for Genio
 revision: 1
 architecture: arm64
 series: devel
