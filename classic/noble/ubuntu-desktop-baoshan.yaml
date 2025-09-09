@@ -19,16 +19,13 @@ rootfs:
     - universe
   seed:
     urls:
-      - "https://git.launchpad.net/~baoshan-team/ubuntu-seeds/+git/"
+      - "https://git.launchpad.net/~ubuntu-core-dev/ubuntu-seeds/+git/"
     branch: noble
     names:
-      - mediatek-genio-common
       - desktop
       - desktop-minimal
-      - desktop-mediatek-genio
       - minimal
       - standard
-      - supported-mediatek-genio-common
   sources-list-deb822: true
 customization:
   cloud-init:
@@ -45,10 +42,23 @@ customization:
       instance_id: ubuntu-desktop
   extra-ppas: []
   extra-packages:
+    # FIXME using extra-packages as a workaround for missing bits to make the
+    # system bootable that should be pulled by seeds or metapackages
+    # signed EFI boot chain
+    - name: grub-efi-arm64-signed
+    - name: shim-signed
+    - name: grub2-common
+    - name: libmali-mtk-8188
+    - name: libmali-mtk-8189
+    - name: libmali-mtk-8195
+    - name: libmali-mtk-8365
+    - name: linux-firmware-mediatek-genio
+    - name: mediatek-mdpd
+    - name: mediatek-vpud
     - name: oem-baoshan-genio-desktop-meta
   extra-snaps:
-    - name: firefox
-      channel: stable/ubuntu-24.04
+    - name: snapd
+    - name: core24
   manual:
     make-dirs:
       - path: /boot/grub

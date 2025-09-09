@@ -19,16 +19,13 @@ rootfs:
     - universe
   seed:
     urls:
-      - "https://git.launchpad.net/~baoshan-team/ubuntu-seeds/+git/"
+      - "https://git.launchpad.net/~ubuntu-core-dev/ubuntu-seeds/+git/"
     branch: noble
     names:
       - cloud-image
-      - mediatek-genio-common
       - minimal
       - server
-      - server-mediatek-genio
       - standard
-      - supported-mediatek-genio-common
   sources-list-deb822: true
 customization:
   cloud-init:
@@ -45,10 +42,19 @@ customization:
       instance_id: ubuntu-server
   extra-ppas: []
   extra-packages:
+    # FIXME using extra-packages as a workaround for missing bits to make the
+    # system bootable that should be pulled by seeds or metapackages
+    # signed EFI boot chain
+    - name: grub-efi-arm64-signed
+    - name: shim-signed
+    - name: grub2-common
+    - name: linux-firmware-mediatek-genio
+    - name: mediatek-mdpd
+    - name: mediatek-vpud
     - name: oem-baoshan-genio-meta
   extra-snaps:
-    - name: core22
-    - name: lxd
+    - name: snapd
+    - name: core24
   manual:
     make-dirs:
       - path: /boot/grub
