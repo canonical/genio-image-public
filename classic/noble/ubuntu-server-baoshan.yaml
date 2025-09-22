@@ -51,7 +51,7 @@ customization:
     - name: linux-firmware-mediatek-genio
     - name: mediatek-mdpd
     - name: mediatek-vpud
-    - name: oem-baoshan-genio-meta
+    - name: mediatek-genio-defaults
   extra-snaps:
     - name: snapd
     - name: core24
