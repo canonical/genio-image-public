@@ -1,14 +1,14 @@
 {
   "ubuntu-env": {
     "edition": "Ubuntu classic/core images",
-    "codename": "noble",
-    "version": "24.04"
+    "codename": "devel",
+    "version": "daily"
   },
   "uboot-env":{
     "env-redund-support": false
   },
   "genio-tools": {
-    "min-version": "1.3.dev2"
+    "min-version": "1.6.2"
   },
   "partitions": {
     "mmc0": "ubuntu.img",

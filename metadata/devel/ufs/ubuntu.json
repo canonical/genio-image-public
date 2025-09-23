@@ -1,11 +1,12 @@
 {
   "ubuntu-env": {
     "edition": "Ubuntu classic/core images",
-    "codename": "testing",
-    "version": "testing"
+    "codename": "devel",
+    "version": "daily"
   },
   "uboot-env":{
-    "env-redund-support": false
+    "env-redund-support": false,
+    "env-size": "8192"
   },
   "genio-tools": {
     "min-version": "1.6.2"
