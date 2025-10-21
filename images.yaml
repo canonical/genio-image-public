@@ -1,0 +1,82 @@
+# images.yaml - Central configuration for image building system
+version: 1.0
+# Platform definitions
+ppas:
+  - name: 'baoshan-ppa/baoshan-proposed'
+    fingerprint: '703A0CD379B768B77C1BA91FDD3EC3B6C6D209D1'
+    keep_enabled: false
+    auth_env: PPA_AUTH_BAOSHAN_PROPOSED
+    applicable_to:
+      - milestones: [daily]
+  - name: 'baoshan-ppa/baoshan-updates'
+    fingerprint: '703A0CD379B768B77C1BA91FDD3EC3B6C6D209D1'
+    keep_enabled: false
+    auth_env: PPA_AUTH_BAOSHAN_UPDATES
+    applicable_to:
+      - milestones: [daily, beta]
+platforms:
+  genio:
+    description: 'MediaTek Genio platforms'
+    arch: arm64
+    series:
+      noble:
+        configurations:
+          - type: server
+            suffix: emmc
+            model: ubuntu-server-baoshan.yaml
+            kernel: linux-mtk
+            gadget: baoshan
+            hooks: genio
+            sector_size: "512"
+          - type: server
+            suffix: ufs
+            model: ubuntu-server-baoshan.yaml
+            kernel: linux-mtk
+            gadget: baoshan
+            hooks: genio
+            sector_size: "4096"
+          - type: desktop
+            suffix: emmc
+            model: ubuntu-desktop-baoshan.yaml
+            kernel: linux-mtk
+            gadget: baoshan
+            hooks: genio
+            sector_size: "512"
+          - type: desktop
+            suffix: ufs
+            model: ubuntu-desktop-baoshan.yaml
+            kernel: linux-mtk
+            gadget: baoshan
+            hooks: genio
+            sector_size: "4096"
+      devel:
+        # The `devel` series is automatically replaced with the latest development release at build time. 
+        configurations:
+          - type: server
+            suffix: emmc
+            model: ubuntu-server-baoshan.yaml
+            kernel: linux-generic
+            gadget: baoshan
+            hooks: genio
+            sector_size: "512"
+          - type: server
+            suffix: ufs
+            model: ubuntu-server-baoshan.yaml
+            kernel: linux-generic
+            gadget: baoshan
+            hooks: genio
+            sector_size: "4096"
+          - type: desktop
+            suffix: emmc
+            model: ubuntu-desktop-baoshan.yaml
+            kernel: linux-generic
+            gadget: baoshan
+            hooks: genio
+            sector_size: "512"
+          - type: desktop
+            suffix: ufs
+            model: ubuntu-desktop-baoshan.yaml
+            kernel: linux-generic
+            gadget: baoshan
+            hooks: genio
+            sector_size: "4096"
