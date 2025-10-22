@@ -30,6 +30,12 @@ $ genio-flash erase-emmc
 To ensure the boot ROM does not try to boot any stale image that was
 previously there.
 
+## G720/G520 eMMC/UFS Selection
+
+HW switchs configuration is required to select boot from UFS and eMMC.
+
+![g720-boot-switch](docs/img/g720-boot-switch.png)
+
 # Building Images
 
 ## Prerequisite
