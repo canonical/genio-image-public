@@ -47,11 +47,24 @@ customization:
     # signed EFI boot chain
     - name: grub-efi-arm64-signed
     - name: shim-signed
+    # for update-grub
     - name: grub2-common
+    ## Core packages required for the platform
+    # common packages for Genio platforms
     - name: linux-firmware-mediatek-genio
     - name: mediatek-mdpd
     - name: mediatek-vpud
     - name: mediatek-genio-defaults
+    # useful system utilities
+    - name: u-boot-tools
+    ## Packages required for Ubuntu IoT base on server seeds (No need for Ubuntu Desktop image)
+    # useful for network setting
+    - name: wpasupplicant
+    # support bluetooth
+    - name: bluez
+    # enable ALSA
+    - name: alsa-ucm-conf
+    - name: pipewire-alsa
   extra-snaps:
     - name: snapd
     - name: core24

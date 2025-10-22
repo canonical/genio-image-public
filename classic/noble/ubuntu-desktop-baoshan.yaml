@@ -47,15 +47,21 @@ customization:
     # signed EFI boot chain
     - name: grub-efi-arm64-signed
     - name: shim-signed
+    # for update-grub
     - name: grub2-common
+    ## Core packages required for the platform
+    # enable Mali driver
     - name: libmali-mtk-8188
     - name: libmali-mtk-8189
     - name: libmali-mtk-8195
     - name: libmali-mtk-8365
+    # common packages for Genio platforms
     - name: linux-firmware-mediatek-genio
     - name: mediatek-mdpd
     - name: mediatek-vpud
     - name: mediatek-genio-defaults
+    # useful system utilities
+    - name: u-boot-tools
   extra-snaps:
     - name: snapd
     - name: core24
