@@ -1,0 +1,49 @@
+type: model
+authority-id: canonical
+revision: 1
+series: 16
+brand-id: canonical
+model: mediatek-genio-dangerous
+architecture: arm64
+base: core24
+grade: dangerous
+snaps:
+  -
+    default-channel: 24/edge
+    id: 7TAD6GcCXwugAvC6c96rEU6NxPrqhuD4
+    name: mediatek-genio
+    type: gadget
+  -
+    default-channel: 24/edge
+    id: xFMGLRAkDsbHq5JyD7pilRTPRyDDDu28
+    name: mediatek-genio-kernel
+    type: kernel
+  -
+    default-channel: latest/edge
+    id: dwTAh7MZZ01zyriOZErqd1JynQLiOGvM
+    name: core24
+    type: base
+  -
+    default-channel: latest/edge
+    id: PMrrV4ml8uWuEUDBT8dSGnKUYbevVhc4
+    name: snapd
+    type: snapd
+  -
+    default-channel: 24/edge
+    id: ASctKBEHzVt3f1pbZLoekCvcigRjtuqw
+    name: console-conf
+    type: app
+storage-safety: prefer-unencrypted
+timestamp: 2025-10-16T13:03:47+00:00
+sign-key-sha3-384: 9tydnLa6MTJ-jaQTFUXEwHl1yRx7ZS4K5cyFDhYDcPzhS7uyEkDxdUjg9g08BtNn
+
+AcLBXAQAAQoABgUCaQTSlQAKCRDgT5vottzAEg1HD/9NlajrM7+s1NwWTBXuFZDaBsf0m/aLeMAt
+LgF1NOC709Xl3XK6uIWVnTUPONJTuee1Gy53Qdj5BQUl+bc18/1Aj5tOCBsQ+Ugt6VypiAIpMsZs
+dnyOosXuLePomYPkLK98xuPJRFKDe3t4iMVOG0SgxxAotX5lzkwE0BDy2/09iys2G3jEBaRnZRji
+v4Akf1Vk4ZxOv/T1LYazIt71g5bQvcQTeYw9GWlrnFl7652dPQEoV/kq/231Ur0n5l9GgnEkZiob
+6F3n2AEp098jhb+7c4cPJA2bDMoXrWK5RfOzbwxZnpUhzuVM1NlRyBL4yxZ0l3CEiZU+NvjR/oQo
+r/u8DVzIFQJYMkmHp6wyyFpULYEZJ3StolAmZVDNF4b92UbGCNVHD40/xOetjOnf3SfiU8U9H/hv
+2/uRPoMxKCADHlTs//qElu6cAucDoirq0vO5IFaJgjcM0E5GVCkypNyYx3gTAiXkcFuVu3n3hFBc
+DXfMZeum7rwgtJVrBdcgQnAu173HvHUXOHCc6bK494pRM+rZvLc97g4i800ASn/g5DadOEuSHDGz
+7WwZWZk5FJlI+41FuCAifqpcdCGaBIpZehHAyCYyCyPxcOUPF6rKQgU2yQIuKh1pt5Wk0PueIUyW
+dZSpc6P+1zTQZL1PASROaQPyfRIl1QxJcV098NgZ5A==
