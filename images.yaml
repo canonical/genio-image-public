@@ -49,6 +49,18 @@ platforms:
             gadget: baoshan
             hooks: genio
             sector_size: "4096"
+          - type: core
+            suffix: emmc
+            model: ubuntu-core-24-genio-arm64-dangerous.model
+            # .keep means don't change gadget snap.
+            gadget: .keep
+            sector_size: "512"
+          - type: core
+            suffix: ufs
+            model: ubuntu-core-24-genio-arm64-dangerous.model
+            # .keep means don't change gadget snap.
+            gadget: .keep
+            sector_size: "4096"
       devel:
         # The `devel` series is automatically replaced with the latest development release at build time. 
         configurations:
