@@ -1,6 +1,8 @@
 # genio-image
 
-[![Build Ubuntu (Genio)](https://github.com/canonical/genio-image/actions/workflows/build.yml/badge.svg)](https://github.com/canonical/genio-image/actions/workflows/build.yml)
+[![Ubuntu Image (daily)](https://github.com/canonical/genio-image/actions/workflows/build.yml/badge.svg)](https://github.com/canonical/genio-image/actions/workflows/build.yml)
+[![Boot Assets (weekly)](https://github.com/canonical/genio-image/actions/workflows/build-boot.yml/badge.svg)](https://github.com/canonical/genio-image/actions/workflows/build-boot.yml)
+[![Generic Image (devel)](https://github.com/canonical/genio-image/actions/workflows/build-generic.yml/badge.svg)](https://github.com/canonical/genio-image/actions/workflows/build-generic.yml)
 
 # Available Automation
 
