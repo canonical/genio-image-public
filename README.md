@@ -1,7 +1,10 @@
 # genio-image
 
 [![Ubuntu Image (daily)](https://github.com/canonical/genio-image/actions/workflows/build.yml/badge.svg)](https://github.com/canonical/genio-image/actions/workflows/build.yml)
+[![Checkbox Test](https://github.com/canonical/genio-image/actions/workflows/checkbox-test.yml/badge.svg)](https://github.com/canonical/genio-image/actions/workflows/checkbox-test.yml)
+
 [![Boot Assets (weekly)](https://github.com/canonical/genio-image/actions/workflows/build-boot.yml/badge.svg)](https://github.com/canonical/genio-image/actions/workflows/build-boot.yml)
+
 [![Generic Image (devel)](https://github.com/canonical/genio-image/actions/workflows/build-generic.yml/badge.svg)](https://github.com/canonical/genio-image/actions/workflows/build-generic.yml)
 
 # Available Automation
