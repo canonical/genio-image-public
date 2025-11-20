@@ -37,6 +37,16 @@ customization:
           - name: ubuntu
             password: ubuntu
             type: text
+      runcmd:
+      - |
+          sector_size=$(lsblk $(findmnt -n -o SOURCE /) -o PHY-SeC -n | tr -d '[:space:]')
+          if [ "$sector_size" -eq 512 ]; then
+              echo "$(find /dev/disk/by-path/*boot1) 0x0 0x1000" > /etc/fw_env.config
+          else
+              # A temporary workaround agreed by Mediatek, we may
+              # need a better mechanism to access the correct path
+              echo "/dev/sdb 0x0 0x2000" > /etc/fw_env.config
+          fi
     meta-data: |
       dsmode: local
       instance_id: ubuntu-desktop
