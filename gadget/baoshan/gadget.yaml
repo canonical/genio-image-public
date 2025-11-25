@@ -1,5 +1,5 @@
 volumes:
-  pc:
+  genio:
     schema: gpt
     bootloader: grub
     structure:

@@ -514,7 +514,7 @@ parameter is what allows them to be emitted at warning level instead of
 failing outright.
 
 This process usually completes in a few minutes, depending on the speed of the
-Internet connection. A file called `pc.img` will be produced in the current
+Internet connection. A file called `genio.img` will be produced in the current
 directory. This is the *Ubuntu Core* bootable image.
 
 TIP: The *console-conf* user-interface that configures the network and system user
@@ -593,12 +593,12 @@ $ tar --strip-components=1 -C "${BOOT_FW_DIR} -xvf "${BOOT_FW_TAR}"
 
 ## Convert the image to a sparse image.
 
-The produced `pc.img` file is a full image, but the `genio-flash` tool
+The produced `genio.img` file is a full image, but the `genio-flash` tool
 requires a sparse image. The `img2simg` tool will do this.
 
 ```
-$ img2simg pc.img "${BOOT_FW_DIR}/ubuntu.img" && \
-    rm -f pc.img
+$ img2simg genio.img "${BOOT_FW_DIR}/ubuntu.img" && \
+    rm -f genio.img
 ```
 
 The `genio-flash` tool requires the disk image to appear in the same directory
