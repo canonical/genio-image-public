@@ -52,6 +52,9 @@ customization:
     - name: core22
     - name: lxd
     - name: firefox
+    # Added gnome-42-2204 as a workaround for early resolute development,
+    # which provide interface required by Firefox on arm64.
+    - name: gnome-42-2204
   extra-packages:
     - name: network-manager
     # signed EFI boot chain
