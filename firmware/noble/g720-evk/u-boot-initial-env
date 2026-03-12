@@ -48,7 +48,7 @@ boot_conf=#conf-mediatek_mt8391-genio-720-evk.dtb#conf-emmc.dtbo#conf-video.dtbo
 list_dtbo= emmc.dtbo video.dtbo apusys.dtbo display-dsi.dtbo
 storage=mmc
 storage_dev=0
-boot_scripts=fitImage
+core_boot_scripts=boot.scr.fit boot.scr
 boot_targets=mmc0
 distro_bootcmd=for target in ${boot_targets}; do if test "${target}" != "embedded"; then dtbprobe ${storage} ${storage_dev} ${dtb_path}; fi; run bootcmd_${target}; done
 scan_dev_for_efi=run boot_efi_bootmgr;if test -e ${devtype} ${devnum}:${distro_bootpart} efi/boot/bootaa64.efi; then echo Found EFI removable media binary efi/boot/bootaa64.efi; run boot_efi_binary; echo EFI LOAD FAILED: continuing...; fi
