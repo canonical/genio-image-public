@@ -75,6 +75,9 @@ customization:
   extra-snaps:
     - name: snapd
     - name: core24
+    # Added mesa-2404 as a workaround which provide interface required by
+    # Thunderbird snap on arm64.
+    - name: mesa-2404
   manual:
     make-dirs:
       - path: /boot/grub
