@@ -1,0 +1,63 @@
+volumes:
+  pc:
+    schema: gpt
+    # bootloader configuration is shipped and managed by snapd
+    bootloader: u-boot
+    structure:
+      # In Mediatek Genio chipset platforms, the 1st bootloader is the prebuilt fip.bin
+      # fip.bin contains BL31 TF-A (Trusted-Firmware A), BL32 OP-TEE OS, and BL33 U-Boot
+      - name: bootloaders
+        size: 4M
+        type: EBD0A0A2-B9E5-4433-87C0-68B6B72699C7
+      - name: bootloaders_b
+        size: 4M
+        type: EBD0A0A2-B9E5-4433-87C0-68B6B72699C7
+      - name: firmware
+        filesystem: vfat
+        type: 384E979B-EB76-435A-A3A6-1A071DBAD91D
+        size: 32M
+      - name: firmware_b
+        filesystem: vfat
+        type: 384E979B-EB76-435A-A3A6-1A071DBAD91D
+        size: 32M
+      - name: dramk
+        size: 524288
+        type: EBD0A0A2-B9E5-4433-87C0-68B6B72699C7
+      - name: misc
+        size: 1M
+        type: EBD0A0A2-B9E5-4433-87C0-68B6B72699C7
+      - name: bootassets
+        size: 32M
+        type: EBD0A0A2-B9E5-4433-87C0-68B6B72699C7
+      - name: ubuntu-seed
+        role: system-seed
+        filesystem: vfat
+        # UEFI will boot the ESP partition by default first
+        type: EF,C12A7328-F81F-11D2-BA4B-00A0C93EC93B
+        size: 1200M
+        update:
+          edition: 1
+        content:
+          - source: boot-assets/
+            target: /
+      - name: ubuntu-boot
+        role: system-boot
+        filesystem: vfat
+        type: 0C,EBD0A0A2-B9E5-4433-87C0-68B6B72699C7
+        # whats the appropriate size?
+        size: 750M
+        content:
+          # TODO:UC20: install the boot.sel via snapd instead of via the gadget
+          - source: boot.sel
+            target: uboot/ubuntu/boot.sel
+      - name: ubuntu-save
+        role: system-save
+        filesystem: ext4
+        type: 83,0FC63DAF-8483-4772-8E79-3D69D8477DE4
+        size: 32M
+      - name: ubuntu-data
+        role: system-data
+        filesystem: ext4
+        type: 83,0FC63DAF-8483-4772-8E79-3D69D8477DE4
+        # XXX: make auto-grow to partition
+        size: 1500M

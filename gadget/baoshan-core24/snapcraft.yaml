@@ -1,0 +1,75 @@
+name: mediatek-genio
+version: 24-1~0ea
+title: Mediatek Genio gadget
+summary: Mediatek Genio gadget
+description: |
+    This gadget enables Mediatek Genio 350, 510, 700, 720, and 1200 boards to
+    work with Ubuntu Core
+type: gadget
+base: core24
+
+platforms:
+  arm64:
+    build-on: [amd64, arm64]
+    build-for: [arm64]
+
+confinement: strict
+grade: stable
+
+parts:
+  test-keys:
+    plugin: nil
+    build-packages:
+      - wget
+    build-environment:
+      - SOURCE_TAG: rity-scarthgap-v25.0
+    override-pull: |
+      craftctl default
+      SRC_URL="https://gitlab.com/mediatek/aiot/rity/meta-rity/-/raw/${SOURCE_TAG}/meta/recipes-bsp/u-boot/files/"
+      wget ${SRC_URL}/u-boot.crt
+      wget ${SRC_URL}/u-boot.key
+      wget ${SRC_URL}/u-boot-img.crt
+      wget ${SRC_URL}/u-boot-img.key
+      cp *.crt *.key "${CRAFT_PART_INSTALL}"
+    organize:
+      '*': keys/
+    prime:
+      - -*
+
+  gadget:
+    after:
+      - test-keys
+    plugin: dump
+    source: boot-assets
+    build-packages:
+      - device-tree-compiler
+      - dpkg-dev
+      - lsb-release
+      - make
+      - u-boot-tools
+    override-build: |
+      craftctl default
+      # TODO:UC20: currently we use an empty uboot.conf as a landmark for the new
+      #            uboot style where there is no uboot.env installed onto the root
+      #            of the partition and instead the boot.scr is used. this may
+      #            change for the final release
+      touch "${CRAFT_PART_INSTALL}"/uboot.conf
+      # the boot.sel file is currently installed onto ubuntu-boot from the gadget
+      # but that will probably change soon so that snapd installs it instead
+      # it is empty now, but snapd will write vars to it
+      mkenvimage -s 4096 -o "${CRAFT_PART_INSTALL}"/boot.sel - < /dev/null
+
+      # U-Boot boot script: The U-Boot boot script is only used when secure boot
+      # is disabled or in the case of a secure boot test image. When secure boot
+      # is enabled, please integrate the script into U-Boot.
+      mkimage -A arm64 -O linux -T script -C none -n "boot script" -d bootscr.mtk boot.scr
+      # Genio 350: U-Boot fails to run boot.scr because CONFIG_LEGACY_IMAGE_FORMAT
+      # is disabled. Create a boot script in the FIT image format for Genio 350.
+      mkimage -F -k ${CRAFT_STAGE}/keys/ -f bootscr.its boot.scr.fit
+      cp boot.scr boot.scr.fit "${CRAFT_PART_INSTALL}"
+    organize:
+      'boot.scr*': boot-assets/
+    prime:
+      - boot-assets/*
+      - boot.sel
+      - uboot.conf

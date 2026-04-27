@@ -1,0 +1,38 @@
+/dts-v1/;
+
+/ {
+    description = "Ubuntu Core U-Boot boot script FIT image";
+    #address-cells = <1>;
+
+    images {
+        default = "bootscr-mtk";
+        bootscr-mtk {
+	    data = /incbin/("bootscr.mtk");
+            type = "script";
+            compression = "none";
+            hash-1 {
+                    algo = "sha256";
+            };
+            signature-1 {
+                    algo = "sha256,rsa3072";
+                    key-name-hint = "u-boot-img";
+            };
+        };
+    };
+
+    configurations {
+        default = "bootscr";
+        bootscr {
+            script = "bootscr-mtk";
+            hash-1 {
+                    algo = "sha256";
+            };
+            signature-1 {
+                    algo = "sha256,rsa3072";
+                    key-name-hint = "u-boot";
+                    padding = "pkcs-1.5";
+                    sign-images = "script";
+            };
+        };
+    };
+};
