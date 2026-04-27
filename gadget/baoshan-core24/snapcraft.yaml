@@ -1,5 +1,5 @@
 name: mediatek-genio
-version: 24-1~0ea
+version: 24-1~1beta
 title: Mediatek Genio gadget
 summary: Mediatek Genio gadget
 description: |
@@ -22,7 +22,7 @@ parts:
     build-packages:
       - wget
     build-environment:
-      - SOURCE_TAG: rity-scarthgap-v25.0
+      - SOURCE_TAG: rity-scarthgap-v25.1.1
     override-pull: |
       craftctl default
       SRC_URL="https://gitlab.com/mediatek/aiot/rity/meta-rity/-/raw/${SOURCE_TAG}/meta/recipes-bsp/u-boot/files/"
