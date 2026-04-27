@@ -3,19 +3,16 @@ version: 24-1~1beta
 title: Mediatek Genio gadget
 summary: Mediatek Genio gadget
 description: |
-    This gadget enables Mediatek Genio 350, 510, 700, 720, and 1200 boards to
-    work with Ubuntu Core
+  This gadget enables Mediatek Genio 350, 510, 700, 720, and 1200 boards to
+  work with Ubuntu Core
 type: gadget
 base: core24
-
 platforms:
   arm64:
     build-on: [amd64, arm64]
     build-for: [arm64]
-
 confinement: strict
 grade: stable
-
 parts:
   test-keys:
     plugin: nil
@@ -35,7 +32,6 @@ parts:
       '*': keys/
     prime:
       - -*
-
   gadget:
     after:
       - test-keys
