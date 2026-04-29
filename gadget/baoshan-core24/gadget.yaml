@@ -1,5 +1,5 @@
 volumes:
-  pc:
+  genio:
     schema: gpt
     # bootloader configuration is shipped and managed by snapd
     bootloader: u-boot
