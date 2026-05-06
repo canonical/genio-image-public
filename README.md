@@ -5,7 +5,7 @@
 
 [![Boot Assets (weekly)](https://github.com/canonical/genio-image/actions/workflows/build-boot.yml/badge.svg)](https://github.com/canonical/genio-image/actions/workflows/build-boot.yml)
 
-[![Generic Image (devel)](https://github.com/canonical/genio-image/actions/workflows/build-generic.yml/badge.svg)](https://github.com/canonical/genio-image/actions/workflows/build-generic.yml)
+[![Generic Image (weekly)](https://github.com/canonical/genio-image/actions/workflows/build-generic.yml/badge.svg)](https://github.com/canonical/genio-image/actions/workflows/build-generic.yml)
 
 # Available Automation
 

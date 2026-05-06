@@ -2,7 +2,7 @@ name: ubuntu-desktop-genio-arm64
 display-name: Ubuntu Desktop arm64 for Genio
 revision: 1
 architecture: arm64
-series: devel
+series: resolute
 class: preinstalled
 kernel: linux-image-generic
 gadget:
@@ -15,7 +15,6 @@ rootfs:
   pocket: updates
   components:
     - main
-    - restricted
     - universe
     - multiverse
   seed:
@@ -52,9 +51,6 @@ customization:
     - name: core22
     - name: lxd
     - name: firefox
-    # Added gnome-42-2204 as a workaround for early resolute development,
-    # which provide interface required by Firefox on arm64.
-    - name: gnome-42-2204
   extra-packages:
     - name: network-manager
     # signed EFI boot chain

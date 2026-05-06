@@ -1,5 +1,5 @@
-name: ubuntu-server-genio-arm64
-display-name: Ubuntu Server arm64 for Genio
+name: ubuntu-desktop-genio-arm64
+display-name: Ubuntu Desktop arm64 for Genio
 revision: 1
 architecture: arm64
 series: devel
@@ -15,7 +15,6 @@ rootfs:
   pocket: updates
   components:
     - main
-    - restricted
     - universe
     - multiverse
   seed:
@@ -23,10 +22,10 @@ rootfs:
       - 'https://git.launchpad.net/~ubuntu-core-dev/ubuntu-seeds/+git/'
     branch: devel
     names:
-      - server
+      - desktop
+      - desktop-minimal
       - minimal
       - standard
-      - cloud-image
 customization:
   components:
     - main
@@ -46,11 +45,15 @@ customization:
             type: text
     meta-data: |
       dsmode: local
-      instance_id: ubuntu-server
+      instance_id: ubuntu-desktop
   extra-snaps:
     - name: snapd
     - name: core22
     - name: lxd
+    - name: firefox
+    # Added gnome-42-2204 as a workaround for early resolute development,
+    # which provide interface required by Firefox on arm64.
+    - name: gnome-42-2204
   extra-packages:
     - name: network-manager
     # signed EFI boot chain
@@ -77,6 +80,6 @@ customization:
       fsck-order: 2
 artifacts:
   img:
-    - name: ubuntu-server.img
+    - name: ubuntu-desktop.img
   manifest:
-    name: ubuntu-server.manifest
+    name: ubuntu-desktop.manifest

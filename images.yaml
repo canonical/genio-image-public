@@ -61,34 +61,3 @@ platforms:
             # .keep means don't change gadget snap.
             gadget: .keep
             sector_size: "4096"
-      devel:
-        # The `devel` series is automatically replaced with the latest development release at build time. 
-        configurations:
-          - type: server
-            suffix: emmc
-            model: ubuntu-server-baoshan.yaml
-            kernel: linux-generic
-            gadget: baoshan
-            hooks: genio
-            sector_size: "512"
-          - type: server
-            suffix: ufs
-            model: ubuntu-server-baoshan.yaml
-            kernel: linux-generic
-            gadget: baoshan
-            hooks: genio
-            sector_size: "4096"
-          - type: desktop
-            suffix: emmc
-            model: ubuntu-desktop-baoshan.yaml
-            kernel: linux-generic
-            gadget: baoshan
-            hooks: genio
-            sector_size: "512"
-          - type: desktop
-            suffix: ufs
-            model: ubuntu-desktop-baoshan.yaml
-            kernel: linux-generic
-            gadget: baoshan
-            hooks: genio
-            sector_size: "4096"

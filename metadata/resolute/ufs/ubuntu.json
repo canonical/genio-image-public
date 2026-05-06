@@ -1,0 +1,42 @@
+{
+  "ubuntu-env": {
+    "edition": "Ubuntu classic/core images",
+    "codename": "resolute",
+    "version": "26.04"
+  },
+  "uboot-env":{
+    "env-redund-support": false,
+    "env-size": "8192"
+  },
+  "genio-tools": {
+    "min-version": "1.7.2"
+  },
+  "partitions": {
+    "mmc0": "ubuntu.img",
+    "mmc0boot0": "bl2.img",
+    "mmc0boot1": "u-boot-env.bin",
+    "bootloaders": "fip.bin",
+    "bootloaders_b": "fip.bin",
+    "firmware": "firmware.vfat",
+    "firmware_b": "firmware.vfat",
+    "dramk": null,
+    "misc": null,
+    "capsule": null,
+    "bootassets": "bootassets.vfat"
+  },
+  "groups": {
+    "all": {
+      "erase": ["mmc0", "mmc0boot0", "mmc0boot1"],
+      "flash": ["mmc0", "mmc0boot0", "mmc0boot1", "bootloaders", "bootloaders_b", "firmware", "firmware_b", "bootassets"]
+    },
+    "bootloaders": {
+      "flash": ["bootloaders"]
+    },
+    "erase-emmc": {
+      "erase": ["mmc0", "mmc0boot0", "mmc0boot1"]
+    },
+    "board-assets": {
+      "flash": ["mmc0boot0", "mmc0boot1", "bootloaders", "bootloaders_b", "firmware", "firmware_b", "bootassets"]
+    }
+  }
+}
