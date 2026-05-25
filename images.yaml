@@ -51,13 +51,13 @@ platforms:
             sector_size: "4096"
           - type: core
             suffix: emmc
-            model: ubuntu-core-24-genio-arm64-dangerous.model
+            model: ubuntu-core-24-genio-arm64.model
             # .keep means don't change gadget snap.
             gadget: .keep
             sector_size: "512"
           - type: core
             suffix: ufs
-            model: ubuntu-core-24-genio-arm64-dangerous.model
+            model: ubuntu-core-24-genio-arm64.model
             # .keep means don't change gadget snap.
             gadget: .keep
             sector_size: "4096"
