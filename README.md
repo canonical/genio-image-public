@@ -37,7 +37,7 @@ previously there.
 
 ## G720/G520 eMMC/UFS Selection
 
-HW switchs configuration is required to select boot from UFS and eMMC.
+HW switch configuration is required to select boot from UFS and eMMC.
 
 ![g720-boot-switch](docs/img/g720-boot-switch.png)
 
