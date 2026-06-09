@@ -45,7 +45,7 @@ customization:
             type: text
     meta-data: |
       dsmode: local
-      instance_id: ubuntu-server
+      instance-id: ubuntu-server
   extra-snaps:
     - name: snapd
     - name: core22

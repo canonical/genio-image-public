@@ -49,7 +49,7 @@ customization:
           fi
     meta-data: |
       dsmode: local
-      instance_id: ubuntu-server
+      instance-id: ubuntu-server
   extra-ppas: []
   extra-packages:
     # FIXME using extra-packages as a workaround for missing bits to make the
