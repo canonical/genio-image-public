@@ -15,6 +15,12 @@ There are also Github Actions in the `.github` directory. The `build.yaml`
 file schedules builds of the Genio images daily, and is the ultimate authority
 on how to build the images.
 
+# baoshan-release PPA
+
+All automation adds the baoshan-team/baoshan-release PPA to the build. This
+public PPA will receive all packages and updates potentially required by
+users.
+
 # Boot Modes
 
 ## All Boards

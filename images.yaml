@@ -14,6 +14,11 @@ ppas:
     auth_env: PPA_AUTH_BAOSHAN_UPDATES
     applicable_to:
       - milestones: [daily, beta]
+  - name: 'baoshan-team/baoshan-release'
+    fingerprint: 'CB4586AF5C6BCD8DF3D48B6856DDEA4936C799E5'
+    keep_enabled: true
+    applicable_to:
+      - milestones: [daily, beta, ga]
 platforms:
   genio:
     description: 'MediaTek Genio platforms'
