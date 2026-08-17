@@ -14,6 +14,12 @@ ppas:
     auth_env: PPA_AUTH_BAOSHAN_UPDATES
     applicable_to:
       - milestones: [daily, beta]
+  - name: 'canonical-hwe-private/mediatek-proposed'
+    fingerprint: '0BFB2684FAC26DFB51414137C94BBB21AB0F4C93'
+    keep_enabled: false
+    auth_env: PPA_AUTH_CANONICAL_HWE_PRIVATE_MEDIATEK_PROPOSED
+    applicable_to:
+      - milestones: [ga]
   - name: 'baoshan-team/baoshan-release'
     fingerprint: 'CB4586AF5C6BCD8DF3D48B6856DDEA4936C799E5'
     keep_enabled: true
