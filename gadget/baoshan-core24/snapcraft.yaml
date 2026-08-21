@@ -3,7 +3,7 @@ version: 24-1~1beta
 title: Mediatek Genio gadget
 summary: Mediatek Genio gadget
 description: |
-  This gadget enables Mediatek Genio 350, 510, 700, 720, and 1200 boards to
+  This gadget enables Mediatek Genio 350, 510, 520, 700, 720, and 1200 boards to
   work with Ubuntu Core
 type: gadget
 base: core24
