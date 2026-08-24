@@ -13,6 +13,16 @@ platforms:
     build-for: [arm64]
 confinement: strict
 grade: stable
+
+slots:
+  mediatek-genio-mipi-camera:
+    interface: custom-device
+    custom-device: mediatek-genio-mipi-camera
+    devices:
+      - /dev/mtk_hcp
+      - /dev/mtk_ccd
+      - /dev/vcu2
+
 parts:
   test-keys:
     plugin: nil
