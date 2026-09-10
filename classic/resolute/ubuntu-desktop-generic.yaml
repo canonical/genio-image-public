@@ -20,7 +20,7 @@ rootfs:
   seed:
     urls:
       - 'https://git.launchpad.net/~ubuntu-core-dev/ubuntu-seeds/+git/'
-    branch: devel
+    branch: resolute
     names:
       - desktop
       - desktop-minimal
@@ -48,11 +48,9 @@ customization:
       instance-id: ubuntu-desktop
   extra-snaps:
     - name: snapd
-    - name: core22
+    - name: core24
     - name: lxd
-    - name: firefox
   extra-packages:
-    - name: network-manager
     # signed EFI boot chain
     - name: grub-efi-arm64-signed
     - name: shim-signed
