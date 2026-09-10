@@ -48,14 +48,9 @@ customization:
       instance-id: ubuntu-desktop
   extra-snaps:
     - name: snapd
-    - name: core22
+    - name: core24
     - name: lxd
-    - name: firefox
-    # Added gnome-42-2204 as a workaround for early resolute development,
-    # which provide interface required by Firefox on arm64.
-    - name: gnome-42-2204
   extra-packages:
-    - name: network-manager
     # signed EFI boot chain
     - name: grub-efi-arm64-signed
     - name: shim-signed
