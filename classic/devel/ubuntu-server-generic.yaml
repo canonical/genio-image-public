@@ -48,7 +48,7 @@ customization:
       instance-id: ubuntu-server
   extra-snaps:
     - name: snapd
-    - name: core22
+    - name: core24
     - name: lxd
   extra-packages:
     - name: network-manager
