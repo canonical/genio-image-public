@@ -20,7 +20,7 @@ rootfs:
   seed:
     urls:
       - 'https://git.launchpad.net/~ubuntu-core-dev/ubuntu-seeds/+git/'
-    branch: devel
+    branch: resolute
     names:
       - server
       - minimal
@@ -48,7 +48,7 @@ customization:
       instance-id: ubuntu-server
   extra-snaps:
     - name: snapd
-    - name: core22
+    - name: core24
     - name: lxd
   extra-packages:
     - name: network-manager
