@@ -61,3 +61,17 @@ volumes:
         type: 83,0FC63DAF-8483-4772-8E79-3D69D8477DE4
         # XXX: make auto-grow to partition
         size: 1500M
+# Interface connection instructions for plugs and slots of seeded snaps to
+# connect at first boot. These auto-connect the interfaces required by the
+# mediatek-genio-vcodec snap: hardware-observe, process-control and
+# mediatek-accel, none of which are auto-connected by snapd's built-in
+# policy. All three are implicit slots provided by the system (core/snapd);
+# use the "system" nick per the gadget.yaml spec, not the literal "snapd"
+# snap name, otherwise snapd logs "ignoring missing slot" and skips it.
+connections:
+  - plug: EBEJL6hDiedvRzOMrZjGLS9Ad4jdXcRp:hardware-observe
+    slot: system:hardware-observe
+  - plug: EBEJL6hDiedvRzOMrZjGLS9Ad4jdXcRp:process-control
+    slot: system:process-control
+  - plug: EBEJL6hDiedvRzOMrZjGLS9Ad4jdXcRp:mediatek-accel
+    slot: system:mediatek-accel
