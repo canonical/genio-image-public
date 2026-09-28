@@ -7,6 +7,8 @@
 
 [![Generic Image (weekly)](https://github.com/canonical/genio-image/actions/workflows/build-generic.yml/badge.svg)](https://github.com/canonical/genio-image/actions/workflows/build-generic.yml)
 
+Repository statistics [dashboard](https://canonical.github.io/genio-image/)
+
 # Available Automation
 
 For building locally, there is a `scripts/build.sh` script in this repository.
