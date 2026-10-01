@@ -50,7 +50,10 @@ customization:
     meta-data: |
       dsmode: local
       instance-id: ubuntu-desktop
-  extra-ppas: []
+  extra-ppas:
+    - name: baoshan-team/baoshan-release
+      fingerprint: CB4586AF5C6BCD8DF3D48B6856DDEA4936C799E5
+      keep-enabled: true
   extra-packages:
     # FIXME using extra-packages as a workaround for missing bits to make the
     # system bootable that should be pulled by seeds or metapackages
