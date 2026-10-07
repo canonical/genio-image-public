@@ -1,0 +1,239 @@
+name: mediatek-genio-npu
+base: core24
+summary: MediaTek Genio NPU Runtime
+description: |
+  This snap provides the MediaTek Genio NPU runtime for MediaTek Genio
+  platforms, enabling AI and machine learning capabilities.
+
+  Upstream libraries are collected from:
+  - NP_SNAP_NEUROPILOT_GIT_INFO
+  - NP_SNAP_ONNXRUNTIME_GIT_INFO
+  - NP_SNAP_TENSORFLOW_GIT_INFO
+
+confinement: strict
+grade: devel
+
+version: 'NP_SNAP_VERSION'
+
+environment:
+  PATH: ${SNAP}/bin:${SNAP}/usr/bin:${SNAP}/usr/sbin:${PATH}
+
+layout:
+  /etc/apusys:
+    bind: $SNAP/etc/apusys
+
+slots:
+  mediatek-npu-2404:
+    interface: content
+    content: mediatek-npu-2404
+    read:
+      - $SNAP/export
+parts:
+  # For MediaTek Genio 520/720
+  mtk-apusys-nhw-mt8189:
+    plugin: dump
+    source: https://gitlab.com/mediatek/aiot/bsp/mtk-apusys-firmware.git
+    source-commit: f7ab392d47a817d6976caa800181c9c9cef1ac52 # mt8189 branch
+    override-build: |
+      install -D -t ${CRAFT_PART_INSTALL}/export/etc/apusys/mt8189 ${CRAFT_PART_SRC}/nhw
+
+  # For MediaTek Genio 510/700
+  mtk-apusys-nhw-mt8188:
+    plugin: dump
+    source: https://gitlab.com/mediatek/aiot/bsp/mtk-apusys-firmware.git
+    source-commit: 3e31bb965867736dc19cfa8438f35e9e40ad6e60 # mt8188 branch
+    override-build: |
+      install -D -t ${CRAFT_PART_INSTALL}/export/etc/apusys/mt8188 ${CRAFT_PART_SRC}/nhw
+
+  # For MediaTek Genio 1200
+  mtk-apusys-nhw-mt8195:
+    plugin: dump
+    source: https://gitlab.com/mediatek/aiot/bsp/mtk-apusys-firmware.git
+    source-commit: 2502c4bf3eabec12ef1d4a8098f419b2f1a2f6e0 # mt8195 branch
+    override-build: |
+      install -D -t ${CRAFT_PART_INSTALL}/export/etc/apusys/mt8195 ${CRAFT_PART_SRC}/nhw
+
+  mtk-neuropilot-prebuilts:
+    plugin: nil
+    source: https://gitlab.com/mediatek/aiot/rity/mtk-neuropilot-prebuilts.git
+    source-commit: NP_SNAP_NEUROPILOT_HASH
+    stage-packages:
+    - libc++1
+    override-build: |
+      make install \
+        NP_VER=6 \
+        MDW_VER=android13 \
+        LIBDIR=$CRAFT_PART_INSTALL/export/v6/lib \
+        SBINDIR=$CRAFT_PART_INSTALL/export/v6/bin \
+        DATADIR=$CRAFT_PART_INSTALL/export/v6/share \
+        INCLUDEDIR=$CRAFT_PART_INSTALL/export/v6/include
+      make install \
+        NP_VER=8 \
+        MDW_VER=android15 \
+        LIBDIR=$CRAFT_PART_INSTALL/export/v8/lib \
+        SBINDIR=$CRAFT_PART_INSTALL/export/v8/bin \
+        DATADIR=$CRAFT_PART_INSTALL/export/v8/share \
+        INCLUDEDIR=$CRAFT_PART_INSTALL/export/v8/include
+      # Upstream ships each versioned shared library as 3 regular files
+      # (libfoo.so, libfoo.so.N, libfoo.so.N.M.P) instead of the usual
+      # real-file + symlink-chain layout. Verified byte-for-byte identical
+      # with `cmp` before doing this. Replace the duplicates with symlinks
+      # to the fully-versioned file, matching normal SONAME convention.
+      ln -sf libneuronusdk_adapter.mtk.so.6.3.3 $CRAFT_PART_INSTALL/export/v6/lib/libneuronusdk_adapter.mtk.so
+      ln -sf libneuronusdk_adapter.mtk.so.6.3.3 $CRAFT_PART_INSTALL/export/v6/lib/libneuronusdk_adapter.mtk.so.6
+      ln -sf libneuronusdk_runtime.mtk.so.6.3.3 $CRAFT_PART_INSTALL/export/v6/lib/libneuronusdk_runtime.mtk.so
+      ln -sf libneuronusdk_runtime.mtk.so.6.3.3 $CRAFT_PART_INSTALL/export/v6/lib/libneuronusdk_runtime.mtk.so.6
+      ln -sf libneuronusdk_adapter.mtk.so.8.2.16 $CRAFT_PART_INSTALL/export/v8/lib/libneuronusdk_adapter.mtk.so
+      ln -sf libneuronusdk_adapter.mtk.so.8.2.16 $CRAFT_PART_INSTALL/export/v8/lib/libneuronusdk_adapter.mtk.so.8
+      ln -sf libneuronusdk_runtime.mtk.so.8.2.16 $CRAFT_PART_INSTALL/export/v8/lib/libneuronusdk_runtime.mtk.so
+      ln -sf libneuronusdk_runtime.mtk.so.8.2.16 $CRAFT_PART_INSTALL/export/v8/lib/libneuronusdk_runtime.mtk.so.8
+    organize:
+      usr/lib/aarch64-linux-gnu/: export/lib/
+      usr/lib/llvm-*: export/
+    prime:
+      - export
+      # Test tools and sample scripts/models belong to mtk-neuropilot, not the
+      # runtime — except llm_cmdline_tool and mllm_llava, which are runtime
+      # dependencies of LLM/VLM demo snaps (e.g. mtk-neuropilot-llm-demo) and
+      # must ship here (resolved via PATH by the runtime wrapper:
+      # $EXPORT_DIR/v8/bin). Both are NP_VER=8-only per the prebuilts Makefile.
+      - -export/v6/bin
+      - -export/v8/bin/apu_mdw_test
+      - -export/v8/bin/edma_test
+      - -export/v8/bin/mdla5.5_player
+      - -export/v8/bin/neuronrt
+      - -export/v8/bin/runtime_api_sample
+      - -export/v6/share
+      - -export/v8/share
+  mtk-tensorflow-prebuilts:
+    plugin: make
+    source: https://gitlab.com/mediatek/aiot/rity/tensorflowlite-prebuilt.git
+    source-commit: NP_SNAP_TENSORFLOW_HASH
+    make-parameters:
+    - LIBDIR=$CRAFT_PART_INSTALL/export/lib
+    - SBINDIR=$CRAFT_PART_INSTALL/export/bin
+    - DATADIR=$CRAFT_PART_INSTALL/export/share
+    - INCLUDEDIR=$CRAFT_PART_INSTALL/export/include
+    stage:
+    - export/lib/
+
+  # ONNX Runtime 1.20.2 (Neuron EP) requires libprotobuf-lite.so.25.8.0 and
+  # versioned abseil libs that core24 does not ship (core24's protobuf/abseil
+  # are older, unversioned builds). Build protobuf 4.25.8 with its bundled
+  # abseil-cpp submodule from source instead, to match the ABI ORT's
+  # DT_NEEDED entries expect.
+  mtk-protobuf-lite:
+    plugin: cmake
+    source: https://github.com/protocolbuffers/protobuf.git
+    source-commit: a4cbdd3ed0042e8f9b9c30e8b0634096d9532809 # 25.x branch, v4.25.8
+    build-packages:
+    - zlib1g-dev
+    override-pull: |
+      craftctl default
+      # snapcraft's source-submodules fetches against the default branch
+      # before the source-commit checkout runs, leaving the submodule empty
+      # at the pinned commit. Sync it explicitly after checkout instead.
+      git -C "${CRAFT_PART_SRC}" submodule update --init --recursive third_party/abseil-cpp
+    cmake-parameters:
+    - -DCMAKE_BUILD_TYPE=Release
+    - -DCMAKE_INSTALL_LIBDIR=lib
+    - -DBUILD_SHARED_LIBS=ON
+    - -Dprotobuf_BUILD_SHARED_LIBS=ON
+    - -Dprotobuf_BUILD_TESTS=OFF
+    - -Dprotobuf_BUILD_EXAMPLES=OFF
+    - -Dprotobuf_BUILD_LIBPROTOC=OFF
+    - -Dprotobuf_BUILD_PROTOC_BINARIES=OFF
+    # Build abseil as a bundled module instead of depending on core24's
+    # (older, unversioned) libabsl packages.
+    - -Dprotobuf_ABSL_PROVIDER=module
+    # Versioned libabsl_*.so.2308.0.0, matching ORT's DT_NEEDED entries.
+    - -DABSL_ENABLE_INSTALL=ON
+    # Bakes $ORIGIN into the abseil .so's so they find each other and
+    # libprotobuf-lite once installed flat into export/lib/. Backslash-escaped
+    # so the generated build script doesn't try to shell-expand $ORIGIN.
+    - -DCMAKE_INSTALL_RPATH=\$ORIGIN
+    - -DCMAKE_BUILD_WITH_INSTALL_RPATH=ON
+    # Default CMAKE_INSTALL_PREFIX is /usr/local; verified via a real build
+    # that libprotobuf-lite.so's SONAME is the fully-versioned
+    # libprotobuf-lite.so.25.8.0 (not a bare-major .so.25), and the unversioned
+    # dev symlink is created automatically — no extra symlink fix needed.
+    organize:
+      usr/local/lib/libprotobuf-lite.so*: export/lib/
+      usr/local/lib/libabsl_*.so*: export/lib/
+    stage:
+    - export/lib/libprotobuf-lite.so*
+    - export/lib/libabsl_*.so*
+    prime:
+    - export/lib/libprotobuf-lite.so*
+    - export/lib/libabsl_*.so*
+
+  mtk-onnxruntime-prebuilts:
+    after: [mtk-protobuf-lite]
+    plugin: make
+    source: https://gitlab.com/mediatek/aiot/rity/onnxruntime-prebuilt.git
+    source-commit: NP_SNAP_ONNXRUNTIME_HASH
+    make-parameters:
+    - ORT_EP=1 # select ort_w_ep/ (Neuron EP enabled), not ort_wo_ep/
+    - LIBDIR=$CRAFT_PART_INSTALL/export/lib
+    - DATADIR=$CRAFT_PART_INSTALL/export/share
+    - INCLUDEDIR=$CRAFT_PART_INSTALL/export/include
+    override-build: |
+      craftctl default
+      # onnxruntime-prebuilt does not bundle protobuf/abseil. Its Python
+      # capi/ dir is only self-contained for the ORT .so's themselves
+      # ($ORIGIN copies already included upstream); give it local copies of
+      # the protobuf-lite/abseil libs built by mtk-protobuf-lite too, since
+      # onnxruntime_pybind11_state.so needs them and capi/ has its own
+      # $ORIGIN (independent of export/lib/).
+      capi_dir="${CRAFT_PART_INSTALL}/export/lib/python3.12/site-packages/onnxruntime/capi"
+      cp -a "${CRAFT_STAGE}"/export/lib/libprotobuf-lite.so* "$capi_dir/"
+      cp -a "${CRAFT_STAGE}"/export/lib/libabsl_*.so* "$capi_dir/"
+    stage:
+    - export/lib/
+    - export/include/
+
+  wrapper:
+    plugin: dump
+    source: wrapper/
+    organize:
+      mediatek-genio-npu-wrapper: export/bin/mediatek-genio-npu-wrapper
+
+lint:
+  ignore:
+    - library:
+      # These are needed but are flagged
+      # by the linter because they are not
+      # explicitly linked to any binary or
+      # shared object, but rather dynamically
+      # loaded by apps.
+      - export/lib/gpu_external_delegate.so
+      - export/lib/libneuron_stable_delegate.so
+      - export/lib/libtensorflowlite.so
+      - export/lib/libtensorflowlite_c.so
+      - export/lib/nnapi_external_delegate.so
+      - export/v6/lib/libapu_mdw_batch.so.2.0.0
+      - export/v6/lib/libneuron_platform.vpu.so
+      - export/v6/lib/libneuronusdk_adapter.mtk.so
+      - export/v6/lib/libneuronusdk_adapter.mtk.so.6
+      - export/v6/lib/libneuronusdk_adapter.mtk.so.6.3.3
+      - export/v6/lib/libneuronusdk_runtime.mtk.so
+      - export/v6/lib/libneuronusdk_runtime.mtk.so.6
+      - export/v6/lib/libneuronusdk_runtime.mtk.so.6.3.3
+      - export/v6/lib/libvpu5.so.5.0.0
+      - export/v8/lib/libapu_mdw.so
+      - export/v8/lib/libapu_mdw_batch.so
+      - export/v8/lib/libapusys_edma.so
+      - export/v8/lib/libneuronusdk_adapter.mtk.so
+      - export/v8/lib/libneuronusdk_adapter.mtk.so.8
+      - export/v8/lib/libneuronusdk_adapter.mtk.so.8.2.16
+      - export/v8/lib/libneuronusdk_runtime.mtk.so
+      - export/v8/lib/libneuronusdk_runtime.mtk.so.8
+      - export/v8/lib/libneuronusdk_runtime.mtk.so.8.2.16
+      # ORT loads its EP plugins via dlopen(), not DT_NEEDED, both from the
+      # top-level lib/ dir and from the self-contained Python capi/ dir.
+      - export/lib/libonnxruntime_provider_neuron_wrapper.so
+      - export/lib/libonnxruntime_providers_shared.so
+      - export/lib/python3.12/site-packages/onnxruntime/capi/libonnxruntime.so.1.20.2
+      - export/lib/python3.12/site-packages/onnxruntime/capi/libonnxruntime_provider_neuron_wrapper.so
+      - export/lib/python3.12/site-packages/onnxruntime/capi/libonnxruntime_providers_shared.so
+      - export/lib/python3.12/site-packages/onnxruntime/capi/onnxruntime_pybind11_state.so
