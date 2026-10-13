@@ -33,7 +33,10 @@ customization:
     - universe
     - multiverse
   pocket: updates
-  extra-ppas: []
+  extra-ppas:
+    - name: baoshan-team/baoshan-release
+      fingerprint: CB4586AF5C6BCD8DF3D48B6856DDEA4936C799E5
+      keep-enabled: true
   cloud-init:
     user-data: |
       #cloud-config

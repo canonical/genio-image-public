@@ -13,15 +13,10 @@ Repository statistics [dashboard](https://canonical.github.io/genio-image/)
 
 For building locally, there is a `scripts/build.sh` script in this repository.
 
-There are also Github Actions in the `.github` directory. The `build.yaml`
-file schedules builds of the Genio images daily, and is the ultimate authority
-on how to build the images.
-
-# baoshan-release PPA
-
-All automation adds the baoshan-team/baoshan-release PPA to the build. This
-public PPA will receive all packages and updates potentially required by
-users.
+Noble and Resolute builds add the baoshan-team/baoshan-release PPA to the
+build. This public PPA will receive all packages and updates potentially
+required by users. The "devel" build is intended to be an upstream generic
+build and does not add any MTK-specific repos.
 
 # Boot Modes
 
@@ -86,9 +81,15 @@ More information about these steps is available with `snap info genio-tools`
 
 ## Including PPA Packages When Building Manually
 
-By default, the `classic/*/ubuntu-*-baoshan.yaml` files have the `extra-ppas` section set to an empty list.
+By default, the `classic/(noble|resolute)/ubuntu-*.yaml` files have
+the `extra-ppas` section set to only include the
+`baoshan-team/baoshan-release` PPA, which contains Genio-specific packages.
 
-If you want to include PPA packages when building images manually, you need to modify the corresponding YAML file(s) and provide a valid PPA token.
+The devel image does not include this PPA since it is intended to be a vanilla
+Ubuntu image.
+
+If you want to include PPA packages when building images manually, you need to
+modify the corresponding YAML file(s) and provide a valid PPA token.
 
 Example configuration:
 
@@ -107,8 +108,8 @@ Please contact the project administrator to request access to the required PPA t
 
 Obtain an access tokens for Baoshan PPAs:
 
-- [baoshen-updates](https://launchpad.net/~baoshan-ppa/+archive/ubuntu/baoshan-updates/+subscriptions)
-- [baoshen-proposed](https://launchpad.net/~baoshan-ppa/+archive/ubuntu/baoshan-proposed/+subscriptions)
+- [baoshan-updates](https://launchpad.net/~baoshan-ppa/+archive/ubuntu/baoshan-updates/+subscriptions)
+- [baoshan-proposed](https://launchpad.net/~baoshan-ppa/+archive/ubuntu/baoshan-proposed/+subscriptions)
 
 The token will be in the form `username:access-key`. Update the YAML
 files with the access token so the build will be able to fetch required
