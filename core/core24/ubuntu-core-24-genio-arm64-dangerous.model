@@ -33,16 +33,27 @@ snaps:
     id: ASctKBEHzVt3f1pbZLoekCvcigRjtuqw
     name: console-conf
     type: app
-timestamp: 2025-11-12T06:50:16+00:00
+  -
+    components:
+      mdpd-mt8365: required
+      vpud-mt8188: required
+      vpud-mt8365: required
+      vpud-mt8391: required
+      vpud-mt8395: required
+    default-channel: latest/edge
+    id: EBEJL6hDiedvRzOMrZjGLS9Ad4jdXcRp
+    name: mediatek-genio-vcodec
+    type: app
+timestamp: 2026-09-25T02:00:00+00:00
 sign-key-sha3-384: 9tydnLa6MTJ-jaQTFUXEwHl1yRx7ZS4K5cyFDhYDcPzhS7uyEkDxdUjg9g08BtNn
 
-AcLBXAQAAQoABgUCaR3A6wAKCRDgT5vottzAEohMD/4y3DKM6HMNcvzOtNAXOWiXfJZKzXymkYzM
-qBLilgJDFpVsVMSCURLXWwX7vWGjzLCnO+pd4uTYrYLHu3lld5c1gLOId5EeiBRXKErt81YgBwVC
-Z7keAh8eWspZl4bRJGMPm7XDT8o1Mj3ZWw8i/wUitdg8HqWc98BUKKDtNP4a1v2485y2j7BHaJpi
-1AIQTtpVd6ZLRQohsISypo+2aBmbJRGsPW5SNGm8X5+ghsRjfdjH+ARrai02lueBQ2r1rDkkVpsv
-S+P+PHDXLCrITOMcHBHGTAZOJ+2Bl1gpdg+ktZIG9c7tye/UxuGSoOszgPLv1b3phIq3PA6UariD
-6axKs2XOPdscI+RuKr10qY5RMdJZyFdXeENDAGjuNv+08Ccub8rvRS3Jk9fxY+rBqrQfk+vePwRt
-p9EXDZ7wQaiLW55F31Lb562oG4U/UN4DZZnaBrk4JAWlm5cf1lMaMHkGt15qBKjCsGr1v5tTEt8d
-wVRPzq6aTmubP/xEEP++74UFKsUXG7xFbsG0XytYSYOQ71wUPIRg1JhI0482YRNLVhRd1EdbtTtv
-a3qq1ZHtWyQniNNm3NzGAutY8F2U+lVBQyiPDBKPLG6jv5gKedbHI/JiOGL6sAhV/uTxt58Imk4g
-//z08dWU1hOTFF6e8EQ2T1YOEICnhSA/3AqUPTEJUw==
+AcLBXAQAAQoABgUCatoQ7wAKCRDgT5vottzAEvdtD/0ZHmCdvzfuvCnPUdD7pBOp5Qu/+bdstSTu
+OgdiC8x2hdVfI0Vxdf+Zde04J251vs1m3suIEy1tN1hJp+0m/kqCwYJiZnKS2ZpL2XwSQ+tz+PV2
+k4WZ2LoqHGa44z5kiHhVsply1cotfx3z+wJF5CvkE4n6FBfHtoQMRfDM0HN2OSSefgPb3ugeYeV2
+dBo7AVMBTefQ5zZVJFgQmdyjDrWKjk6y5K9gha5g8FbLlvOCrXgGNuSfYf2fjh4vqmJbVTmG5I/E
+LToKLT/nSiFphZ3IDoK2AiuCZBQca3AX/d+Gy5KduFygOF7F4PgIVU2MXMHIbgrAJuwlaQBh0mvN
+MPWmYlDOYLglOytTgeHF71f6GlWzmlbm5bZikmuvpntmlpAc9BpP5BLLXpII+WJuBwXKa6Ed2r6h
+EeQNY5WWUkuQi7VaB/gTmfXjGPZxY3SYAyRW6uXL7jg4CzLdTb9q+eeloLB6W03kQdFlPvOms3WB
+8GuGdHZN55AGA0jBtkvNAZRRZavq5Mg0VQT+A+dl9AuAAK7fw3bzuywueMJjGvZmr1psfV8BPJAm
+WVmf2grinRKyAAF0uDMHULQgIWz73tIBhuds2FYjZHVMWbevgjxYq/pGSz5Drc1c7QC040I7gEwo
+Q6KUVWUDMADcsqMcLUJVdp35dJckUZtgEdVarXy+/Q==
