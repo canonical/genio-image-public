@@ -81,10 +81,11 @@ customization:
     # Added mesa-2404 as a workaround which provide interface required by
     # Thunderbird snap on arm64.
     - name: mesa-2404
-    # The firefox snap now declares a content interface that needs the
-    # gnome-core26 provider, and ubuntu-image (enforce mode) rejects the image
-    # when the provider is not seeded explicitly.
+    # The firefox snap now declares content interfaces that need the
+    # gnome-core26 and mesa-2604 (gpu-2604) providers, and ubuntu-image
+    # (enforce mode) rejects the image when they are not seeded explicitly.
     - name: gnome-core26
+    - name: mesa-2604
   manual:
     make-dirs:
       - path: /boot/grub
