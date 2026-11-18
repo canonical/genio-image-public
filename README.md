@@ -124,7 +124,7 @@ are `ubuntu.img` and `ubuntu.json`.
 If using the `scripts/build.sh` script then an output directory is created for the
 build to contain all the files.
 
-# Build eMMC Image for G350/G510/G700/G1200
+# Build eMMC Image for G350/G360/G510/G700/G1200
 
 ## To build desktop image
 ```
