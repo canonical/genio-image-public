@@ -1,0 +1,21 @@
+#!/usr/bin/bash
+
+APUSYS_HW=$(grep -anrP 'mediatek,mt\d+-apusys_rv' --include=compatible /sys/firmware/devicetree/base/ 2>/dev/null | tr -d '\0')
+CWD=$(dirname "$(readlink -f "$0")")
+EXPORT_DIR=$(dirname "$CWD")
+case "$APUSYS_HW" in
+  *mt8188*) MODEL=mt8188 ; NP_VERSION=v6 ;;
+  *mt8189*) MODEL=mt8189 ; NP_VERSION=v8 ;;
+  *mt8195*) MODEL=mt8195 ; NP_VERSION=v6 ;;
+  *)
+    echo "mediatek-genio-npu: Unsupported hardware: $APUSYS_HW" >&2
+    exit 1
+    ;;
+esac
+
+export NEUROPILOT_NHW_PATH="$EXPORT_DIR/etc/apusys/$MODEL"
+export LD_LIBRARY_PATH="$EXPORT_DIR/lib:$EXPORT_DIR/$NP_VERSION/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+export PATH="$EXPORT_DIR/bin:$EXPORT_DIR/$NP_VERSION/bin${PATH:+:$PATH}"
+export PYTHONPATH="$EXPORT_DIR/lib/python3.12/site-packages${PYTHONPATH:+:$PYTHONPATH}"
+
+exec "$@"
