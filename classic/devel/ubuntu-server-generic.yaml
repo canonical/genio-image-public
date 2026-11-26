@@ -48,8 +48,7 @@ customization:
       instance-id: ubuntu-server
   extra-snaps:
     - name: snapd
-    - name: core24
-    - name: lxd
+    - name: core26
   extra-packages:
     - name: network-manager
     # signed EFI boot chain

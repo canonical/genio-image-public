@@ -48,8 +48,11 @@ customization:
       instance-id: ubuntu-desktop
   extra-snaps:
     - name: snapd
-    - name: core24
-    - name: lxd
+    - name: core26
+    # The firefox snap declares content interfaces that need the gnome-core26 and mesa-2604 (gpu-2604) providers,
+    # and ubuntu-image (enforce mode) rejects the image when they are not seeded explicitly.
+    - name: gnome-core26
+    - name: mesa-2604
   extra-packages:
     # signed EFI boot chain
     - name: grub-efi-arm64-signed
